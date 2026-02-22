@@ -1,25 +1,59 @@
 import { defineConfig } from 'tsup';
+import path from 'path';
+import fs from 'fs';
 
 export default defineConfig({
-  entry: ['src/index.ts'],
+  entry: {
+    index: 'index.js',
+  },
   format: ['cjs', 'esm'],
-  dts: true,
   splitting: false,
   sourcemap: true,
   clean: true,
-  minify: false,
-  treeshake: true,
-  external: ['next', 'babel-loader','clean-webpack-plugin','globby','terser-webpack-plugin','workbox-webpack-plugin','workbox-window'],
-  esbuildOptions(options) {
-    options.banner = {
-      js: `/**
- * @opensourceframework/{package-name}
- * {brief-description}
- * 
- * @original-author {original-author}
- * @original-repo {original-repo-url}
- * @license {original-license}
+  dts: false,
+  external: [
+    'next',
+    'webpack',
+    'webpack/**',
+    'babel-loader',
+    'clean-webpack-plugin',
+    'globby',
+    'terser-webpack-plugin',
+    'workbox-webpack-plugin',
+    'workbox-window',
+  ],
+  banner: {
+    js: `/**
+ * @opensourceframework/next-pwa
+ * Zero config PWA plugin for Next.js with Turbopack compatibility
+ *
+ * @original-author Shadow Walker
+ * @original-repo https://github.com/shadowwalker/next-pwa
+ * @license MIT
  */`,
+  },
+  noExternal: [],
+  esbuildOptions(options) {
+    options.platform = 'node';
+    options.alias = {
+      '~': path.resolve(__dirname, './'),
     };
+  },
+  onSuccess: async () => {
+    const filesToCopy = [
+      'register.js',
+      'fallback.js',
+      'cache.js',
+      'build-custom-worker.js',
+      'build-fallback-worker.js',
+    ];
+
+    for (const file of filesToCopy) {
+      const src = path.join(process.cwd(), file);
+      const dest = path.join(process.cwd(), 'dist', file);
+      if (fs.existsSync(src)) {
+        fs.copyFileSync(src, dest);
+      }
+    }
   },
 });
