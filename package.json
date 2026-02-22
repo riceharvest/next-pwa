@@ -1,0 +1,51 @@
+{
+  "name": "@opensourceframework/next-pwa",
+  "version": "5.6.0",
+  "description": "Next.js with PWA, powered by workbox.",
+  "main": "index.js",
+  "repository": "https://github.com/shadowwalker/next-pwa",
+  "author": "OpenSource Framework Contributors (fork), Original: Unknown",
+  "license": "MIT",
+  "private": false,
+  "keywords": [
+    "nextjs",
+    "pwa",
+    "workbox",
+    "web",
+    "service-worker"
+  ],
+  "dependencies": {
+    "babel-loader": "^8.2.5",
+    "clean-webpack-plugin": "^4.0.0",
+    "globby": "^11.0.4",
+    "terser-webpack-plugin": "^5.3.3",
+    "workbox-webpack-plugin": "^6.5.4",
+    "workbox-window": "^6.5.4"
+  },
+  "devDependencies": {
+    "webpack": "^5.74.0"
+  },
+  "peerDependencies": {
+    "next": ">=9.0.0"
+  },
+  "resolutions": {
+    "@typescript-eslint/eslint-plugin": "5.18.0"
+  },
+  "contributors": [
+    {
+      "name": "Unknown",
+      "url": "https://github.com/next-pwa"
+    }
+  ],
+  "homepage": "https://github.com/riceharvest/opensourceframework/tree/main/packages/next-pwa#readme",
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "funding": {
+    "type": "GitHub",
+    "url": "https://github.com/sponsors/riceharvest"
+  }
+}
