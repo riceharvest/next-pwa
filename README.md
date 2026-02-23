@@ -334,4 +334,4 @@ Here is the [document on how to write runtime caching configurations](https://de
 
 ## License
 
-MIT
+MIT\n\n---\n\nMaintained by @opensourceframework in the [monorepo](https://github.com/riceharvest/opensourceframework).
