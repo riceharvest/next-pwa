@@ -1,9 +1,9 @@
 name: CI
 on:
   push:
-    branches: [main]
+    branches: [main, master]
   pull_request:
-    branches: [main]
+    branches: [main, master]
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -20,7 +20,15 @@ jobs:
           cache: 'pnpm'
       - name: Install dependencies
         run: pnpm install --no-frozen-lockfile
-      - name: Build
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+      - name: Build library
         run: pnpm build
+      - name: Lint
+        run: pnpm lint
+      - name: Typecheck
+        run: pnpm typecheck
+      - name: Build test app
+        run: cd test-app && pnpm build
       - name: Test
-        run: pnpm test -- --passWithNoTests
+        run: pnpm test
